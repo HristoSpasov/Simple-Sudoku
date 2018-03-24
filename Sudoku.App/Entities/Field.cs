@@ -9,14 +9,18 @@
         private char[,] content;
         private int value;
         private bool isImmutable;
+        private int boardRow;
+        private int boardCol;
 
-        public Field(int minCol, int minRow, char[,] content, int value, bool isImmutable)
+        public Field(int minCol, int minRow, char[,] content, int value, bool isImmutable, int boardRow, int boardCol)
         {
             this.minCol = minCol;
             this.minRow = minRow;
             this.Content = content;
             this.value = value;
             this.isImmutable = isImmutable;
+            this.boardRow = boardRow;
+            this.boardCol = boardCol;
         }
 
         public int Value
@@ -71,6 +75,22 @@
             set
             {
                 this.content = value;
+            }
+        }
+
+        public int BoardRow
+        {
+            get
+            {
+                return this.boardRow;
+            }
+        }
+
+        public int BoardCol
+        {
+            get
+            {
+                return this.boardCol;
             }
         }
     }

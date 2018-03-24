@@ -47,6 +47,7 @@
     <Compile Include="Constants\FieldConstants.cs" />
     <Compile Include="Constants\MouseConstants.cs" />
     <Compile Include="Constants\SudokuConstants.cs" />
+    <Compile Include="Core\Commands\CheckCommand.cs" />
     <Compile Include="Core\Commands\ExitCommand.cs" />
     <Compile Include="Core\Commands\SolutionCommand.cs" />
     <Compile Include="Core\SudokuGenerator.cs" />

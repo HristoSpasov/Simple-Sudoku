@@ -7,6 +7,7 @@
     using Sudoku.App.Constants;
     using Sudoku.App.Entities;
     using Sudoku.App.Factories;
+    using Sudoku.App.Utilities;
 
     public class BoardManager
     {
@@ -63,6 +64,8 @@
 
             int offset = 1; // Used to overcome borders
 
+            AsciiNumberFactory asciiNumberFactory = Modules.Instance.GetService<AsciiNumberFactory>();
+
             // Loop over the generated array of digits and create new field object
             for (int row = 0; row < generatedSudoku.Length; row++)
             {
@@ -70,8 +73,7 @@
 
                 for (int col = 0; col < generatedSudoku[row].Length; col++)
                 {
-                    AsciiNumberFactory asciiNumberFactory = new AsciiNumberFactory();
-                    Field newField = new Field(topLeftFieldStartCol, topLeftFieldStartRow, asciiNumberFactory.GetNumberAscii(generatedSudoku[row][col]), generatedSudoku[row][col], generatedSudoku[row][col] != 0);
+                    Field newField = new Field(topLeftFieldStartCol, topLeftFieldStartRow, asciiNumberFactory.GetNumberAscii(generatedSudoku[row][col]), generatedSudoku[row][col], generatedSudoku[row][col] != 0, row, col);
 
                     if (newField.Value == 0)
                     {
