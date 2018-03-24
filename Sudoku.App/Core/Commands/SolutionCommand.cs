@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using Sudoku.App.Entities;
     using Sudoku.App.Interfaces;
-    using Sudoku.App.Utilities;
 
     public class SolutionCommand : ICommand
     {
@@ -33,8 +32,10 @@
             this.boardManager.GenerateBoard();
             this.boardManager.InitializeFields(solvedGrid);
             this.boardManager.DrawFieldsContentAndUpdateBoard();
-            // Console.WriteLine(this.solver.Backtrack);
-            // Console.WriteLine(watch.ElapsedMilliseconds);
+
+            //// Console.WriteLine(this.solver.Backtrack);
+            //// Console.WriteLine(watch.ElapsedMilliseconds);
+
             Environment.Exit(0);
         }
     }

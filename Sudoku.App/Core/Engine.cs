@@ -1,23 +1,23 @@
 ﻿namespace Sudoku.App.Core
 {
     using System;
-    using Microsoft.Extensions.DependencyInjection;
     using Sudoku.App.Constants;
     using Sudoku.App.Entities;
     using Sudoku.App.Factories;
     using Sudoku.App.Interfaces;
+    using Sudoku.App.Utilities;
 
     public class Engine
     {
-        private readonly IServiceProvider serviceProvider;
+        private readonly ModulesManager modulesManager;
         private readonly BoardManager boardManager;
         private readonly Mouse mouse;
 
-        public Engine(IServiceProvider serviceProvider, BoardManager boardManager, Mouse mouse)
+        public Engine(ModulesManager modulesManager)
         {
-            this.serviceProvider = serviceProvider;
-            this.boardManager = boardManager;
-            this.mouse = mouse;
+            this.modulesManager = modulesManager;
+            this.boardManager = modulesManager.GetService<BoardManager>();
+            this.mouse = modulesManager.GetService<Mouse>();
         }
 
         public void Run()
@@ -68,7 +68,7 @@
 
         private int[][] generateSudoku()
         {
-            SudokuGenerator generator = this.serviceProvider.GetService<SudokuGenerator>();
+            SudokuGenerator generator = this.modulesManager.GetService<SudokuGenerator>();
             int[][] generatedSudoku = generator.GenerateNewSukoku();
 
             return generatedSudoku;
@@ -90,7 +90,7 @@
             {
                 ConsoleKeyInfo pressedKey = ConsoleManager.ReadKey();
 
-                AsciiNumberFactory asciiNumberFactory = this.serviceProvider.GetService<AsciiNumberFactory>();
+                AsciiNumberFactory asciiNumberFactory = this.modulesManager.GetService<AsciiNumberFactory>();
 
                 switch (pressedKey.Key)
                 {
@@ -149,7 +149,7 @@
             {
                 string commandName = buttonMatch.Id;
 
-                CommandFactory commandFactory = this.serviceProvider.GetService<CommandFactory>();
+                CommandFactory commandFactory = this.modulesManager.GetService<CommandFactory>();
                 ICommand cmd = commandFactory.GetCommand(commandName);
 
                 cmd.Execute(this.boardManager.Fields);

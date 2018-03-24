@@ -4,14 +4,15 @@
     using System.Linq;
     using System.Reflection;
     using Sudoku.App.Interfaces;
+    using Sudoku.App.Utilities;
 
     public class CommandFactory
     {
-        private readonly IServiceProvider serviceProvider;
+        private readonly ModulesManager modulesManager;
 
-        public CommandFactory(IServiceProvider serviceProvider)
+        public CommandFactory()
         {
-            this.serviceProvider = serviceProvider;
+            this.modulesManager = Modules.Instance;
         }
 
         public ICommand GetCommand(string cmdName)
@@ -34,9 +35,19 @@
                 .Select(pi => pi.ParameterType)
                 .ToArray();
 
-            object[] dependencies = constructorParameters
-                .Select(this.serviceProvider.GetService)
-                .ToArray();
+            object[] dependencies = new object[constructorParameters.Length];
+            int counter = 0;
+            foreach (Type param in constructorParameters)
+            {
+                object instance =
+                    this.modulesManager.GetType()
+                        .GetMethod("GetService")
+                        .MakeGenericMethod(new[] { param })
+                        .Invoke(this.modulesManager, null);
+
+                dependencies[counter] = instance;
+                counter++;
+            }
 
             ICommand command = (ICommand)constructor.Invoke(dependencies);
 

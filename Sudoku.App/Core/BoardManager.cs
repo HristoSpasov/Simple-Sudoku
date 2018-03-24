@@ -1,11 +1,9 @@
 ﻿namespace Sudoku.App.Core
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Microsoft.Extensions.DependencyInjection;
     using Sudoku.App.Constants;
     using Sudoku.App.Entities;
     using Sudoku.App.Factories;
@@ -15,14 +13,12 @@
         private readonly char[][] board;
         private readonly HashSet<Field> fields;
         private readonly HashSet<Button> buttons;
-        private readonly IServiceProvider serviceProvider;
 
-        public BoardManager(IServiceProvider serviceProvider)
+        public BoardManager()
         {
             this.board = new char[50][];
             this.fields = new HashSet<Field>();
             this.buttons = new HashSet<Button>();
-            this.serviceProvider = serviceProvider;
         }
 
         public HashSet<Field> Fields
@@ -74,7 +70,7 @@
 
                 for (int col = 0; col < generatedSudoku[row].Length; col++)
                 {
-                    AsciiNumberFactory asciiNumberFactory = this.serviceProvider.GetService<AsciiNumberFactory>();
+                    AsciiNumberFactory asciiNumberFactory = new AsciiNumberFactory();
                     Field newField = new Field(topLeftFieldStartCol, topLeftFieldStartRow, asciiNumberFactory.GetNumberAscii(generatedSudoku[row][col]), generatedSudoku[row][col], generatedSudoku[row][col] != 0);
 
                     if (newField.Value == 0)
