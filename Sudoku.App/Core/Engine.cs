@@ -94,6 +94,11 @@
 
                 switch (pressedKey.Key)
                 {
+                    case ConsoleKey.NumPad0:
+                    case ConsoleKey.D0:
+                        fieldMatch.Value = 0;
+                        fieldMatch.Content = asciiNumberFactory.GetNumberAscii(0);
+                        break;
                     case ConsoleKey.NumPad1:
                     case ConsoleKey.D1:
                         fieldMatch.Value = 1;

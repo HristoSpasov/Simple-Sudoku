@@ -1,30 +1,23 @@
 ﻿namespace Sudoku.App.Utilities
 {
+    using System;
+
     public sealed class CurrentSourceFile
     {
-        private static readonly object Padlock = new object();
-        private static string currentSourceFilePath = null;
+        private static Lazy<string> sourceFileName;
 
         private CurrentSourceFile()
         {
         }
 
-        public static string GetPath
-        {
-            get
-            {
-                return currentSourceFilePath;
-            }
-        }
-
         public static string Instance(string newString)
         {
-            if (currentSourceFilePath == null)
+            if (sourceFileName == null)
             {
-                currentSourceFilePath = newString;
+                sourceFileName = new Lazy<string>(() => newString);
             }
 
-            return currentSourceFilePath;
+            return sourceFileName.Value;
         }
     }
 }

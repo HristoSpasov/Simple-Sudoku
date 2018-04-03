@@ -57,8 +57,6 @@
                         break;
                     case "Enter":
                         return;
-                    case "Escape":
-                        break;
                 }
 
                 if (pointer > this.options.Count - 1)

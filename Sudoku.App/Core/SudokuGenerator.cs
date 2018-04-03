@@ -22,14 +22,7 @@
             int patternId = this.getRandomId(patterns.Length);
             string patternPath = Path.GetFullPath(Path.Combine(allPatternsPath, patterns[patternId]));
 
-            if (CurrentSourceFile.GetPath == null)
-            {
-                CurrentSourceFile.Instance(patternPath);
-            }
-            else
-            {
-                patternPath = CurrentSourceFile.GetPath;
-            }
+            patternPath = CurrentSourceFile.Instance(patternPath);
 
             using (StreamReader reader = new StreamReader(patternPath))
             {
