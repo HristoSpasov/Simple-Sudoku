@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Sudoku.App.Constants;
     using Sudoku.App.Entities;
     using Sudoku.App.Interfaces;
 
@@ -23,14 +24,21 @@
             this.solver.SolveSudoku(grid);
             int[][] solvedGrid = this.solver.GetGrid;
 
+            ConsoleManager.SetCursorPosition(BoardConstants.InformationCol, BoardConstants.InformationRow);
+            ConsoleManager.SetColor(BoardConstants.DefaultPromptColor);
+
             if (this.isCorrect(grid, fields))
             {
-                Console.WriteLine("OK");
+                ConsoleManager.WriteLine(ButtonsConstants.SolutionIsCorrectMsg);
             }
             else
             {
-                Console.WriteLine("Sorry!");
+                ConsoleManager.WriteLine(ButtonsConstants.SolutionIsInCorrectMsg);
             }
+
+            ConsoleManager.SetCursorPosition(0, 0);
+            Console.ReadKey();
+            Console.Clear();
 
             Environment.Exit(0);
         }

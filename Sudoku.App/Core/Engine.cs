@@ -5,6 +5,7 @@
     using Sudoku.App.Entities;
     using Sudoku.App.Factories;
     using Sudoku.App.Interfaces;
+    using Sudoku.App.Menu;
     using Sudoku.App.Utilities;
 
     public class Engine
@@ -77,7 +78,8 @@
         private void runMainMenu()
         {
             ConsoleManager.SetTheConsoleForTheGame();
-            Menu.Menu.StartMenu();
+            MainMenu mainMenu = this.modulesManager.GetService<MainMenu>();
+            mainMenu.StartMenu();
             Console.Clear();
         }
 
@@ -88,6 +90,10 @@
 
             if (fieldMatch != null)
             {
+                ConsoleManager.SetCursorPosition(BoardConstants.InformationCol, BoardConstants.InformationRow);
+                ConsoleManager.SetColor(BoardConstants.DefaultPromptColor);
+                ConsoleManager.Write(BoardConstants.PromptUserForNumberInput);
+
                 ConsoleKeyInfo pressedKey = ConsoleManager.ReadKey();
 
                 AsciiNumberFactory asciiNumberFactory = this.modulesManager.GetService<AsciiNumberFactory>();
@@ -148,7 +154,11 @@
                         break;
                 }
 
+                ConsoleManager.DefaultColors();
                 this.boardManager.UpdateField(fieldMatch);
+
+                ConsoleManager.SetCursorPosition(BoardConstants.InformationCol, BoardConstants.InformationRow);
+                ConsoleManager.Clear(BoardConstants.PromptUserForNumberInput.Length);
             }
             else if (buttonMatch != null)
             {
@@ -159,6 +169,8 @@
 
                 cmd.Execute(this.boardManager.Fields);
             }
+
+            ConsoleManager.SetCursorPosition(mouseCol, mouseRow);
         }
     }
 }

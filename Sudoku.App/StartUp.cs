@@ -1,7 +1,7 @@
 ﻿namespace Sudoku.App
 {
-    using Sudoku.App.Core;
-    using Sudoku.App.Utilities;
+    using Core;
+    using Utilities;
 
     public class StartUp
     {

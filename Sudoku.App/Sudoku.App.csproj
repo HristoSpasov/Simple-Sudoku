@@ -59,8 +59,9 @@
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Factories\CommandFactory.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
-    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\MainMenu.cs" />
     <Compile Include="Menu\Pagination.cs" />
+    <Compile Include="Utilities\MainMenuOptions.cs" />
     <Compile Include="Utilities\Modules.cs" />
     <Compile Include="Utilities\ModulesManager.cs" />
     <Compile Include="StartUp.cs" />

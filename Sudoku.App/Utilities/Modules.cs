@@ -4,6 +4,7 @@
     using Sudoku.App.Core;
     using Sudoku.App.Entities;
     using Sudoku.App.Factories;
+    using Sudoku.App.Menu;
 
     public sealed class Modules
     {
@@ -24,6 +25,9 @@
         private static ModulesManager createManager()
         {
             ModulesManager manager = new ModulesManager();
+
+            manager.Register<MainMenu, MainMenu>();
+            manager.Register<Pagination, Pagination>();
 
             manager.Register<Mouse, Mouse>();
             manager.Register<BoardManager, BoardManager>();

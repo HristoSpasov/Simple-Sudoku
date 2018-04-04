@@ -7,6 +7,8 @@
         public const int CheckMinCol = 92;
         public const int CheckMaxRow = 13;
         public const int CheckMaxCol = 122;
+        public const string SolutionIsCorrectMsg = "Your solution is correct! Press any key to exit.";
+        public const string SolutionIsInCorrectMsg = "Your solution is incorrect! Press any key to exit.";
 
         public const string SolutionId = "Solution";
         public const int SolutionMinRow = 18;
